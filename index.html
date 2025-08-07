@@ -4,11 +4,12 @@
     <meta charset="utf-8">
     <title>FundamentalXR MindAR Test</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- A-Frame and MindAR.js -->
     <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
     <style>
-      body { margin: 0; overflow: hidden;}
-      #ar-container { width: 100vw; height: 100vh; position: fixed;}
+      body { margin: 0; overflow: hidden; }
+      #ar-container { width: 100vw; height: 100vh; position: fixed; }
     </style>
   </head>
   <body>
@@ -17,44 +18,42 @@
         mindar-image="imageTargetSrc: qrcode.mind; autoStart: true;"
         vr-mode-ui="enabled: false"
         device-orientation-permission-ui="enabled: true"
-        renderer="colorManagement: true, physicallyCorrectLights"
+        renderer="colorManagement: true, physicallyCorrectLights: true"
         embedded
       >
         <a-assets>
-		  <img id="logo-texture" src="FundamentalXR-Logo256.png">
-		</a-assets>
-		<a-entity mindar-image-target="targetIndex: 0">
-		  <!-- Front face -->
-		  <a-cylinder
-			src="#logo-texture"
-			position="0 0.25 0"
-			radius="0.25"
-			height="0.01"
-			rotation="90 0 0"
-			animation="property: rotation; to: 90 360 0; loop: true; dur: 4000"
-			shadow="receive: false"
-			side="double"
-			transparent="true"
-		  ></a-cylinder>
-		  <!-- Back face (flipped) -->
-		  <a-cylinder
-			src="#logo-texture"
-			position="0 0.25 0"
-			radius="0.25"
-			height="0.011"
-			rotation="90 180 0"
-			animation="property: rotation; to: 90 360 0; loop: true; dur: 4000"
-			shadow="receive: false"
-			side="double"
-			transparent="true"
-		  ></a-cylinder>
-		  <!-- Text below the coin -->
-		  <a-entity
-			text="value: FundamentalXR - immersive technology to accelerate human excellence; color: #21C6ED; align: center; width: 2; wrapCount: 32; font: https://cdn.aframe.io/fonts/mozillavr.fnt"
-			position="0 -0.1 0"
-			scale="0.13 0.13 0.13"
-		  ></a-entity>
-		</a-entity>
+          <img id="logo-texture" src="FundamentalXR-Logo256.png">
+        </a-assets>
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+          <!-- Front face of coin -->
+          <a-cylinder
+            src="#logo-texture"
+            position="0 0.25 0"
+            radius="0.25"
+            height="0.02"
+            rotation="90 0 0"
+            animation="property: rotation; to: 90 360 0; loop: true; dur: 4000"
+            material="side: double; transparent: true;"
+          ></a-cylinder>
+          <!-- Back face of coin -->
+          <a-cylinder
+            src="#logo-texture"
+            position="0 0.25 0"
+            radius="0.25"
+            height="0.019"
+            rotation="90 180 0"
+            animation="property: rotation; to: 90 360 0; loop: true; dur: 4000"
+            material="side: double; transparent: true;"
+          ></a-cylinder>
+          <!-- Text below the coin -->
+          <a-entity
+            text="value: FundamentalXR - immersive technology to accelerate human excellence; color: #21C6ED; align: center; width: 2.5; wrapCount: 34; font: https://cdn.aframe.io/fonts/mozillavr.fnt"
+            position="0 0.05 0"
+            scale="0.13 0.13 0.13"
+          ></a-entity>
+        </a-entity>
       </a-scene>
     </div>
   </body>
