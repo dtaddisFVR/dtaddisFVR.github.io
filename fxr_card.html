@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>FundamentalXR MindAR Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- A-Frame and MindAR.js -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe@1.4.2/dist/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body { margin: 0; overflow: hidden; }
+      #ar-container { width: 100vw; height: 100vh; position: fixed; }
+    </style>
+  </head>
+  <body>
+    <div id="ar-container">
+      <a-scene
+        mindar-image="imageTargetSrc: qrcode-card.mind; autoStart: true;"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: true"
+        renderer="colorManagement: true, physicallyCorrectLights: true"
+        embedded
+      >
+        <a-assets>
+          <img id="logo-texture" src="FundamentalXR-Logo256.png">
+        </a-assets>
+		
+            <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+		<a-entity mindar-image-target="targetIndex: 0">
+		  <!-- Upright group: 90° about X, then pull slightly toward camera -->
+		  <a-entity id="upright-group" rotation="90 0 0" position="0 0 0.06">
+			<!-- FXR image 'coin' (now vertical) -->
+			<a-cylinder
+			  src="#logo-texture"
+			  position="0 0 0.25"
+			  radius="0.25"
+			  height="0.02"
+			  rotation="0 0 90"
+			  animation="property: rotation; to: 0 360 90; loop: true; dur: 4000"
+			  material="side: double; transparent: true;"
+			></a-cylinder>
+
+			<!-- Big Brand Name (face camera) -->
+			<a-entity
+			  text="value: FundamentalXR; color: #21C6ED; align: center; width: 2.4; font: https://cdn.aframe.io/fonts/mozillavr.fnt"
+			  rotation="-90 0 0"
+			  position="0 0 -0.1"
+			  scale="0.8 0.8 0.8"
+			></a-entity>
+
+			<!-- Background for Tagline (slightly behind the text to avoid z-fighting) -->
+			<a-plane
+			  position="0 0.01 -0.2"
+			  width="0.84"
+			  height="0.22"
+			  color="#222"
+			  opacity="0.65"
+			  rotation="-90 0 0"
+			  material="side: double"
+			></a-plane>
+
+			<!-- Smaller Tagline, below title -->
+			<a-entity
+			  text="value: immersive technology\nto accelerate human excellence; color: #FFFFFF; align: center; width: 2.2; wrapCount: 28; font: https://cdn.aframe.io/fonts/mozillavr.fnt"
+			  rotation="-90 0 0"
+			  position="0 0 -0.2"
+			  scale="0.40 0.40 0.40"
+			></a-entity>
+		  </a-entity>
+		</a-entity>
+	  </a-scene>
+	</div>
+  </body>
+</html>
